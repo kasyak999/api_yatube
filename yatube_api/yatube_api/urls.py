@@ -14,7 +14,7 @@ router.register(URL_API + 'posts', PostViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-token-auth/', views.obtain_auth_token),
+    path(f'{URL_API}api-token-auth/', views.obtain_auth_token),
     path('', include(router.urls)),
     path(f'{URL_API}groups/', GroupsViewSet.as_view()),
     path(f'{URL_API}groups/<int:pk>/', GroupViewSet.as_view()),
