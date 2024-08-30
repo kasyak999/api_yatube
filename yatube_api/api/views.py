@@ -1,12 +1,10 @@
-from django.shortcuts import render
 from posts.models import Post, Group, Comment
-from .serializers import PostSerializer, GroupSerializer, PostsCommentSerializer
-
+from .serializers import (
+    PostSerializer, GroupSerializer, PostsCommentSerializer)
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import action
 
 
 class PostViewSet(viewsets.ModelViewSet):

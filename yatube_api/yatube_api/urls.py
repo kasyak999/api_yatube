@@ -5,8 +5,8 @@ from django.urls import include, path
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 from api.views import (
-    PostViewSet, GroupsViewSet, GroupViewSet, PostsCommentViewSet, CommentViewSet
-)
+    PostViewSet, GroupsViewSet, GroupViewSet, PostsCommentViewSet,
+    CommentViewSet)
 
 router = DefaultRouter()
 URL_API = 'api/v1/'

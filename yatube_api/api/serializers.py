@@ -20,9 +20,6 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class PostsCommentSerializer(serializers.ModelSerializer):
-    # author = serializers.PrimaryKeyRelatedField(read_only=True)
-    # created = serializers.PrimaryKeyRelatedField(read_only=True)
-    # post = serializers.PrimaryKeyRelatedField(read_only=True)
     author = serializers.SlugRelatedField(
         slug_field='username', read_only=True
     )
