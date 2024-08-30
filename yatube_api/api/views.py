@@ -49,3 +49,41 @@ class PostsCommentViewSet(APIView):
             )
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CommentViewSet(APIView):
+    def get(self, request, pk, pk_comment):
+        comment = Comment.objects.get(pk=pk_comment)
+        serializer = PostsCommentSerializer(comment)
+        return Response(serializer.data)
+
+    def put(self, request, pk, pk_comment):
+        comment = Comment.objects.get(pk=pk_comment)
+        serializer = PostsCommentSerializer(
+            comment, data=request.data
+        )
+        if serializer.is_valid():
+            serializer.save(
+                author=self.request.user,
+                post=Post.objects.get(pk=pk)
+            )
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk, pk_comment):
+        comment = Comment.objects.get(pk=pk_comment)
+        serializer = PostsCommentSerializer(
+            comment, data=request.data, partial=True
+        )
+        if serializer.is_valid():
+            serializer.save(
+                author=self.request.user,
+                post=Post.objects.get(pk=pk)
+            )
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, pk_comment):
+        comment = Comment.objects.get(pk=pk_comment)
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
