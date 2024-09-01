@@ -8,6 +8,9 @@ class PostSerializer(serializers.ModelSerializer):
     )
     pub_date = serializers.DateTimeField(read_only=True)
     comments = serializers.SerializerMethodField(read_only=True)
+    group = serializers.SlugRelatedField(
+        slug_field='title', read_only=True
+    )
 
     class Meta:
         model = Post
