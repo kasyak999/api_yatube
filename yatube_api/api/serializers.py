@@ -7,10 +7,14 @@ class PostSerializer(serializers.ModelSerializer):
         slug_field='username', read_only=True
     )
     pub_date = serializers.DateTimeField(read_only=True)
+    comments = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Post
         fields = '__all__'
+
+    def get_comments(self, obj):
+        return obj.comments.count()
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -23,8 +27,9 @@ class CommentSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         slug_field='username', read_only=True
     )
+    # post = PostSerializer(required=False)
 
     class Meta:
         model = Comment
-        fields = ('id', 'author', 'post', 'text', 'created')
+        fields = '__all__'
         read_only_fields = ('created', 'post')

@@ -38,4 +38,5 @@ class PostsCommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(
             author=self.request.user,
-            post=Post.objects.get(pk=self.kwargs['post_pk']))
+            post=Post.objects.get(pk=self.kwargs['post_pk'])
+        )
